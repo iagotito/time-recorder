@@ -1,0 +1,23 @@
+{
+  "name": "time-manager",
+  "version": "0.1.0",
+  "description": "This is a project to help to keep tack of how much time you spent in one or many activities at the end of the day.   It uses the Google Sheets API to save da data of the day in a Google Sheets sheets and to retrieve the data from it to calculate the activities realized in the day and how much time was spent in each one of them.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iagotito/time-manager.git"
+  },
+  "keywords": [
+    "time",
+    "manager"
+  ],
+  "author": "Iago Tito Oliveira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iagotito/time-manager/issues"
+  },
+  "homepage": "https://github.com/iagotito/time-manager#readme"
+}
