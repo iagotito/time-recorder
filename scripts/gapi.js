@@ -16,11 +16,11 @@ async function init () {
 
 function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
+        $authorizeButton.style.display = 'none';
+        $signoutButton.style.display = 'block';
     } else {
-        authorizeButton.style.display = 'block';
-        signoutButton.style.display = 'none';
+        $authorizeButton.style.display = 'block';
+        $signoutButton.style.display = 'none';
     }
 }
 
@@ -30,17 +30,4 @@ async function handleAuthClick(event) {
 
 async function handleSignoutClick(event) {
     await gapi.auth2.getAuthInstance().signOut();
-}
-
-async function start() {
-    try {
-        let apiRequest = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: "1MhkvVs4OfkNUK1WL2D964yeXQnIFzVgjOw0WaudhFbw",
-            range: "Data!A:B",
-        });
-        let res = JSON.parse(apiRequest.body);
-        console.log(res);
-    } catch (e) {
-        console.error(e);
-    }
 }

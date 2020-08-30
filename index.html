@@ -8,17 +8,19 @@
 <body>
   <button id="authorize_button" style="display: none;">Authorize</button>
   <button id="signout_button" style="display: none;">Sign Out</button>
-  <pre id="content" style="white-space: pre-wrap;"></pre>
-  <br><br><br><br>
+  <br><br>
   <input id="log_txt" type="text" placeholder="type the log"/>
   <br><br>
   <button id="log_btn">Log activity</button>
   <br><br>
-  <button id="test_connection_btn">Test connection with sheets</button>
+  <button id="get_data_btn">Retrieve data from your sheet</button>
+  <pre id="data_pre" style="white-space: pre-wrap;"></pre>
 
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="credentials.js"></script>
-  <script src="sheets.js"></script>
-  <script src="main.js"></script>
+  <script src="scripts/gapi.js"></script>
+  <script src="scripts/sheets.js"></script>
+  <script src="scripts/util/util.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>
