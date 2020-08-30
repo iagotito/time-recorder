@@ -1,18 +1,23 @@
-let $log_txt = document.querySelector("#log_txt");
-let $log_btn = document.querySelector("#log_btn");
+let $logTxt = document.querySelector("#logTxt");
+let $logBtn = document.querySelector("#logBtn");
+let $testConnectionBtn = document.querySelector("#testConnectionBtn");
 
 init();
 
 function init () {
-    $log_btn.addEventListener("click", () => {
-    log_txt = $log_txt.value;
-    $log_txt.value = "";
+    $logBtn.addEventListener("click", () => {
+    logTxt = $logTxt.value;
+    $logTxt.value = "";
 
     let log_time = get_time();
 
     //TODO: exclude this logs and save informations in google sheets
-    console.log(log_txt);
+    console.log(logTxt);
     console.log(log_time);
+    });
+    
+    $testConnectionBtn.addEventListener("click", () => {
+      start();
     });
 }
 

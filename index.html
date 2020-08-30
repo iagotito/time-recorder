@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TIME MANAGER</title>
-  <script type="module" src="app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIME RECORDER</title>
 </head>
 <body>
-  <input id="log_txt" type="text" placeholder="type the log"/>
-  <br><br>
-  <button id='log_btn'>Log activity</button>
-</body>
+    <input id="logTxt" type="text" placeholder="type the log"/>
+    <br><br>
+    <button id="logBtn">Log activity</button>
+    <br><br>
+    <button id="testConnectionBtn">Test connection with sheets</button>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="credentials.js"></script>
+    <script src="sheets.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
