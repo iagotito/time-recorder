@@ -32,6 +32,12 @@ function getDate () {
         pad(today.getDate());
 }
 
+function getDateId () {
+    let today = getDate();
+    let todayId = today.slice(0, 4) + today.slice(5, 7) + today.slice(8, 10);
+    return parseInt(todayId);
+}
+
 function pad (num) {
     return (num < 10 ? "0" : "") + num;
 }

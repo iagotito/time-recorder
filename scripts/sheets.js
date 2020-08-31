@@ -15,11 +15,13 @@ async function getData () {
 
 async function createTodaysSheet () {
     let today = getDate();
+    let todayId = getDateId();
     let params = {
         spreadsheetId: SPREADSHEET_ID,
         requests: [{
             addSheet: {
                 properties: {
+                    "sheetId": todayId,
                     "title": today
                 }
             }}
@@ -52,12 +54,24 @@ async function createSheetLayout (sheetName) {
         console.log(e);
     }
 }
-/*
-async function logActivity (log, time) {
-    try {
-        let params = {
 
-        }
+async function logActivity (log, time, sheetName, sheetId) {
+    let range = sheetName + "!A:B";
+    let params = {
+        spreadsheetId: SPREADSHEET_ID,
+        range: range,
+        valueInputOption: "USER_ENTERED",
+        insertDataOption: "INSERT_ROWS"
+    }
+    let reqBody = {
+        "range": range,
+        "majorDimension": "ROWS",
+        "values": [
+          [log, time]
+        ]
+    }
+    try {
+        let req = await gapi.client.sheets.spreadsheets.values.append(params, reqBody);
+        console.log(req.result);   
     } catch (e) {}
 }
-*/

@@ -24,9 +24,11 @@ $logBtn.addEventListener("click", () => {
   $logTxt.value = "";
 
   let logTime = getTime();
+  let today = getDate();
+  let todayId = getDateId();
 
   //TODO: exclude this logs and save informations in google sheets
-  //logActivity(logTxt, logTime);
+  logActivity(logTxt, logTime, today, todayId);
   console.log(logTxt);
   console.log(logTime);
 });
