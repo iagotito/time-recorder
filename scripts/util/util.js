@@ -11,23 +11,24 @@ function formatData (dataMatrix) {
 }
 
 function getTime () {
-    let today = new Date();
     let date = getDate(today);
     let hours = getHours(today);
 
     return date + " " + hours;
 }
 
-function getHours (today) {
+function getHours () {
+    let today = new Date();
     return pad(today.getHours()) + ":" +
         pad(today.getMinutes()) + ":" +
         pad(today.getSeconds());
 }
 
-function getDate (today) {
-    return pad(today.getDate()) + "-" + 
+function getDate () {
+    let today = new Date();
+    return today.getFullYear() + "-" + 
         pad((today.getMonth() + 1)) + "-" +
-        today.getFullYear();
+        pad(today.getDate());
 }
 
 function pad (num) {

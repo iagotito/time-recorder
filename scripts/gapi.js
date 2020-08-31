@@ -12,6 +12,7 @@ async function init () {
         let isSignedIn = await gapi.auth2.getAuthInstance().isSignedIn.get()
         updateSigninStatus(isSignedIn);
     });
+    init();
 }
 
 function updateSigninStatus(isSignedIn) {
