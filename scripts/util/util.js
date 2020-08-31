@@ -11,6 +11,7 @@ function formatData (dataMatrix) {
 }
 
 function getTime () {
+    let today = new Date();
     let date = getDate(today);
     let hours = getHours(today);
 

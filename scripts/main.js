@@ -8,7 +8,7 @@ let $getDataBtn = document.querySelector("#get_data_btn");
 let $dataPre = document.querySelector("#data_pre");
 
 function init () {
-  createSheetForToday();
+  createTodaysSheet();
 }
 
 $authorizeButton.addEventListener("click", () => {
@@ -19,10 +19,6 @@ $signoutButton.addEventListener("click", () => {
   handleSignoutClick();
 });
 
-$createSheetBnt.addEventListener("click", () => {
-  createSheet($logTxt.value);
-});
-
 $logBtn.addEventListener("click", () => {
   let logTxt = $logTxt.value;
   $logTxt.value = "";
@@ -30,6 +26,7 @@ $logBtn.addEventListener("click", () => {
   let logTime = getTime();
 
   //TODO: exclude this logs and save informations in google sheets
+  //logActivity(logTxt, logTime);
   console.log(logTxt);
   console.log(logTime);
 });
