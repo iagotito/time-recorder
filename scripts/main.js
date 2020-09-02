@@ -5,6 +5,8 @@ let $logTxt = document.querySelector("#log_txt");
 let $logBtn = document.querySelector("#log_btn");
 let $getDataBtn = document.querySelector("#get_data_btn");
 
+let $getTimesBtn = document.querySelector("#get_times_btn");
+
 let $dataPre = document.querySelector("#data_pre");
 
 function init () {
@@ -32,9 +34,19 @@ $logBtn.addEventListener("click", () => {
   console.log(logTime);
 });
 
+$logTxt.addEventListener("keypress", (event) => {
+  if (event.keyCode == 13) $logBtn.click();
+});
+
 $getDataBtn.addEventListener("click", async () => {
   console.log("retrieving data");
-  let data = await getData();
+  let data = await getData(getDate());
   console.log(formatData(data));
   $dataPre.innerHTML = formatData(data);
 });
+
+$getTimesBtn.addEventListener("click", async () => {
+  let data = await getTimes(getDate());
+  console.log(data);
+  $dataPre.innerHTML = data;
+})

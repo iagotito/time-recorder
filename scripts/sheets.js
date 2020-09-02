@@ -1,11 +1,13 @@
-async function getData () {
+async function getData (sheetName) {
     let params = {
         spreadsheetId: SPREADSHEET_ID,
-        range: "Data!A:C"
+        range: sheetName + "!A:C"
     }
     try {
         let req = await gapi.client.sheets.spreadsheets.values.get(params);
         let res = JSON.parse(req.body);
+        console.log("res do get data");
+        console.log(res.values);
         return res.values;
     } catch (e) {
         console.error(e);
@@ -34,7 +36,7 @@ async function createTodaysSheet () {
 }
 
 async function createSheetLayout (sheetName) {
-    let range = sheetName + "!A1:C1";
+    let range = sheetName + "!A1:H1";
     let params = {
         spreadsheetId: SPREADSHEET_ID,
         range: range,
@@ -44,7 +46,7 @@ async function createSheetLayout (sheetName) {
         "range": range,
         "majorDimension": "ROWS",
         "values": [
-          ["ACTIVITY", "BEGINNING", "END"]
+          ["ACTIVITY", "BEGINNING", "END", "", "ACTIVITY", "TIME", "TIME (HOURS)", "TIME (MINUTES)"]
         ]
     }
     try {
@@ -74,13 +76,10 @@ async function logActivity (log, time, sheetName) {
     }
     try {
         let req = await gapi.client.sheets.spreadsheets.values.append(params, reqBody);
-        console.log(req.result);   
     } catch (e) {}
 }
 
 async function logEnd (endTime, sheetName) {
-    console.log("Seet name em logEnd");
-    console.log(sheetName);
     let params = {
         spreadsheetId: SPREADSHEET_ID,
         range: sheetName + "!A2:C"
@@ -90,13 +89,11 @@ async function logEnd (endTime, sheetName) {
         let res = JSON.parse(req.body);
 
         let logsMatrix = res.values;
-        console.log("matrix:");
-        console.log(logsMatrix);
         
         // if there is no log rows yet, do not set any end time
         if (typeof logsMatrix === "undefined") return;
         // if the last activity already have the end time setted, do not set ir again
-        if (logsMatrix.slice(-1).length == 3) return;
+        if (logsMatrix.slice(-1)[0].length === 3) return;
 
         let sheetPosition = logsMatrix.length + 1;
         logEndTime(endTime, sheetName, sheetPosition);
@@ -123,10 +120,62 @@ async function logEndTime (endTime, sheetName, sheetPosition) {
     console.log("response do update");
     try {
         let req = await gapi.client.sheets.spreadsheets.values.update(params, reqBody);
-        console.log(req.result);  
+        console.log(req.result);
+        getTimes(sheetName);
     } catch (e) {
         console.log(e);
+    }
+}
 
+async function getTimes (sheetName) {
+    let times = await calculateTimes(sheetName);
+
+    let timesTable = []
+
+    for (let key in times) {
+        let name = key;
+        let time = Math.floor(times[key]) + " hours and " + ((times[key] % 1) * 60) + " minutes";
+        let hours = times[key] + " hours";
+        let minutes = (times[key] * 60) + " minutes";
+
+        timesTable.push([name, time, hours, minutes]);
     }
 
+    let range = sheetName + "!E2:H";
+    let params = {
+        spreadsheetId: SPREADSHEET_ID,
+        range: range,
+        valueInputOption: "USER_ENTERED"
+    };
+    let reqBody = {
+        "range": range,
+        "majorDimension": "ROWS",
+        "values": timesTable
+    };
+    console.log("response do update");
+    try {
+        let req = await gapi.client.sheets.spreadsheets.values.update(params, reqBody);
+        console.log(req.result);  
+    } catch (e) {}
+
+    return timesTable;
+}
+
+async function calculateTimes (sheetName) {
+    let data = await getData(sheetName);
+    if (data.length === 1) return;
+    let logs = data.slice(1);
+
+    let times = {};
+    for (i = 0; i < logs.length; i++) {
+        if (logs[i].length === 2) break;
+
+        if (!(logs[i][0] in times)) {
+            times[logs[i][0]] = calculateTimeDiff(logs[i][1],logs[i][2]);
+        } else {
+            times[logs[i][0]] += calculateTimeDiff(logs[i][1],logs[i][2]);
+        }
+    }
+
+    return times;
 }

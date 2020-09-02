@@ -41,3 +41,13 @@ function getDateId () {
 function pad (num) {
     return (num < 10 ? "0" : "") + num;
 }
+
+function calculateTimeDiff (beginnig, end) {
+    beginnig = new Date(beginnig);
+    end = new Date(end);
+    
+    let diff = end.getTime() - beginnig.getTime();
+    let hoursDiff = diff / (1000 * 60 * 60);
+
+    return hoursDiff;
+}
