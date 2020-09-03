@@ -6,17 +6,30 @@
   <title>TIME RECORDER</title>
 </head>
 <body>
-  <button id="authorize_button" style="display: none;">Authorize</button>
-  <button id="signout_button" style="display: none;">Sign Out</button>
-  <br><br>
-  <input id="log_txt" type="text" placeholder="type the log"/>
-  <br><br>
-  <button id="log_btn">Log activity</button>
-  <br><br>
-  <button id="get_data_btn">Retrieve data from your sheet</button>
-  <button id="get_times_btn">Calculate time of activities</button>
-  <pre id="data_pre" style="white-space: pre-wrap;"></pre>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css" />
 
+  <div class="google-btn" id="authorize-button" style="display: none">
+    <div class="google-icon-wrapper">
+      <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+    </div>
+    <p class="btn-text"><b>Sign in with Google</b></p>
+  </div>
+  <div class="google-btn" id="signout-button" style="display: none;">
+    <div class="google-icon-wrapper">
+      <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+    </div>
+    <p class="btn-text"><b class="btn-text-br">Disconnect</b></p>
+  </div>
+  
+  <br><br>
+  <input id="log-txt" type="text" placeholder="type the log"/>
+  <br><br>
+  <button id="log-btn">Log activity</button>
+  <br><br>
+  <button id="get-data-btn">Retrieve data from your sheet</button>
+  <button id="get-times-btn">Calculate time of activities</button>
+  <pre id="data-pre" style="white-space: pre-wrap;"></pre>
+z
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="credentials.js"></script>
   <script src="scripts/gapi.js"></script>

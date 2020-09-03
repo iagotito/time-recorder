@@ -1,13 +1,13 @@
-let $authorizeButton = document.querySelector('#authorize_button');
-let $signoutButton = document.querySelector('#signout_button');
+let $authorizeButton = document.querySelector('#authorize-button');
+let $signoutButton = document.querySelector('#signout-button');
 
-let $logTxt = document.querySelector("#log_txt");
-let $logBtn = document.querySelector("#log_btn");
-let $getDataBtn = document.querySelector("#get_data_btn");
+let $logTxt = document.querySelector("#log-txt");
+let $logBtn = document.querySelector("#log-btn");
+let $getDataBtn = document.querySelector("#get-data-btn");
 
-let $getTimesBtn = document.querySelector("#get_times_btn");
+let $getTimesBtn = document.querySelector("#get-times-btn");
 
-let $dataPre = document.querySelector("#data_pre");
+let $dataPre = document.querySelector("#data-pre");
 
 function init () {
   createTodaysSheet();
