@@ -1,5 +1,6 @@
 let $authorizeButton = document.querySelector('#authorize-button');
 let $signoutButton = document.querySelector('#signout-button');
+let $loadingDiv = document.querySelector("#loading-div");
 
 let $logTxt = document.querySelector("#log-txt");
 let $logBtn = document.querySelector("#log-btn");

@@ -11,6 +11,7 @@ async function initLibraries () {
         await gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
         let isSignedIn = await gapi.auth2.getAuthInstance().isSignedIn.get()
         updateSigninStatus(isSignedIn);
+        $loadingDiv.style.display = "none";
     });
     init();
 }
