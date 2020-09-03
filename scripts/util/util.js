@@ -49,5 +49,5 @@ function calculateTimeDiff (beginnig, end) {
     let diff = end.getTime() - beginnig.getTime();
     let hoursDiff = diff / (1000 * 60 * 60);
 
-    return hoursDiff;
+    return +(hoursDiff.toFixed(2));
 }

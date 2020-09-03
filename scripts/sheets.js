@@ -134,7 +134,7 @@ async function getTimes (sheetName) {
 
     for (let key in times) {
         let name = key;
-        let time = Math.floor(times[key]) + " hours and " + ((times[key] % 1) * 60) + " minutes";
+        let time = Math.floor(times[key]) + " hours and " + Math.floor(((times[key] % 1) * 60)) + " minutes";
         let hours = times[key] + " hours";
         let minutes = (times[key] * 60) + " minutes";
 
@@ -167,15 +167,21 @@ async function calculateTimes (sheetName) {
     let logs = data.slice(1);
 
     let times = {};
+    let total = 0;
     for (i = 0; i < logs.length; i++) {
         if (logs[i].length === 2) break;
+        let timeDiff = calculateTimeDiff(logs[i][1],logs[i][2]);
 
         if (!(logs[i][0] in times)) {
-            times[logs[i][0]] = calculateTimeDiff(logs[i][1],logs[i][2]);
+            times[logs[i][0]] = timeDiff;
         } else {
-            times[logs[i][0]] += calculateTimeDiff(logs[i][1],logs[i][2]);
+            times[logs[i][0]] += timeDiff;
         }
+
+        total += timeDiff;
     }
+
+    times["TOTAL"] = total;
 
     return times;
 }
