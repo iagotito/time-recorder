@@ -2,28 +2,23 @@
 # Time manager
 
 This is a project to help to keep tack of how much time you spent in one or many activities at the end of the day.  
-It uses the Google Sheets API to save da data of the day in a Google Sheets sheets and to retrieve the data from it to calculate the activities realized in the day and how much time was spent in each one of them.
+It uses the Google Sheets API to save da data of the day in a Google Spreadsheet and to retrieve the data from it to calculate the activities realized in the day and how much time was spent in each one of them.
 
-## How it should work
+## How it works
 
-In the beggining I don't intent to share this to everybody so I don't have to worry about to make it friendly. It can be a local server that I start and allows me to open my localhost and start to log my times.  
-The site will have an text area, where I will type my command, and a button to log this commando. for example:
-- start studying for math  
-> This will log the start time of this activity.
--  start studying for english
-> This will log the end time of the previous activity and the beggining time of this activity.
-- end studying for english 
-- end
-> This will just log the end time of the last open activity.
+It still don't have a friendly approach, so you have to set some informations manually. See the `credentials.json` for more info. It is local server that you can start and allows to start to log your activities.  
+Every day the API creates a new sheet page to that day, and you can only log things in the current's day sheet. In the future you will be able to choose another days.
 
-As you type the activity name it will show a list of the open tasks to make it easy.
+## How to use
 
-It will also have an area that shows an table or something like that with all the daily logs information.
+- To log some activity in your spreadsheet just type the activity name in the text area and click the button or press enter and this will log the start time of this activity.
+- If you log another activity, the previous activity will have it's end time setted to the same as the beggiging of the new one.
+- To end the activity without start a new one just type "end".
+
 
 ## How it should look at the end
 
 Some of my ideas of how it should work are based on [this repository](https://github.com/anvaka/time), but I want to make it myself to learn how to do it and because this project don't have somethings that I want.
 
-This is a picture of how I imagine that the API will save the sheets:  
-![Template](https://imgur.com/a/bIYsCVy)
-
+It shall have extra camps in the main page such as a date selector to which day do you want to retrieve data or even add info.  
+Functions to help the type os activities like as you type the activity name it will show a list of the open tasks to make it easy re-log an repeated activity.
