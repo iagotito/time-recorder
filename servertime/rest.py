@@ -1,7 +1,4 @@
 import os
-import pkg_resources
-import time
-import logging
 
 from flask import Flask, send_from_directory, jsonify, request
 
@@ -20,8 +17,7 @@ def status_endpoint():
 @app.route('/status')
 def status():
     status = {
-        "status": "operacional",
-        "timestamp": time.time()
+        'status': 'operacional',
     }
     return jsonify(status), 200
 
@@ -33,13 +29,16 @@ def index_endpoint():
 
 @app.route('/<filename>')
 def files(filename):
-    if os.path.exists(f"{app.static_folder}/{filename}.html"):
-        filename = f"{filename}.html"
-    mimetype = "text/plain"
-    mimetype = "text/html" if filename.endswith('.html') else mimetype
-    mimetype = "application/javascript" if filename.endswith('.js') else mimetype
-    mimetype = "text/css" if filename.endswith('.css') else mimetype
+    if os.path.exists(f'{app.static_folder}/{filename}.html'):
+        filename = f'{filename}.html'
+    mimetype = 'text/plain'
+    mimetype = 'text/html' if filename.endswith('.html') else mimetype
+    mimetype = 'application/javascript' if filename.endswith('.js') else mimetype
+    mimetype = 'text/css' if filename.endswith('.css') else mimetype
     return send_from_directory(app.static_folder, filename, mimetype=mimetype, cache_timeout=60)
+
+
+@app.route('/
 
 
 @app.after_request
