@@ -4,4 +4,4 @@ const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 // To use your own spreadsheet you have to add it's ID here. The spreadsheet's ID
 // is the text after the "/d/" in it's URL.
 // Remember to sign in with google to an account that have access to this spreadsheet.
-const SPREADSHEET_ID = "YOUR SPREADSHEET'S ID HERE";
+const SPREADSHEET_ID = "1MhkvVs4OfkNUK1WL2D964yeXQnIFzVgjOw0WaudhFbw";
