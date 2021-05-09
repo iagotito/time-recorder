@@ -92,6 +92,23 @@ def post_activity():
     return jsonify(res), 201
 
 
+@app.route('/activity/<id>', methods=['PUT'])
+def update_activity(id):
+    data = request.get_json()
+    _assert('name' in data, 400, 'New activity data without name filed')
+    _assert('date' in data, 400, 'New activity data without date filed')
+    _assert('begginning' in data, 400, 'New activity data without begginning field')
+    try:
+        activity = controller.update_activity(id=id, data=data)
+    except AssertionError as e:
+        _assert(False, 400, str(e))
+    res = {
+        'activity': activity.to_dict(),
+        'status_code': 200
+    }
+    return jsonify(res), 200
+
+
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
