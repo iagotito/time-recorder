@@ -2,6 +2,8 @@ import os
 
 from flask import Flask, send_from_directory, jsonify, request
 
+from . import controller
+
 FRONTEND_DIR = os.path.realpath('frontend')
 if not os.path.exists(FRONTEND_DIR):
     os.mkdir(FRONTEND_DIR)
@@ -9,9 +11,14 @@ if not os.path.exists(FRONTEND_DIR):
 app = Flask(__name__, static_url_path='/', static_folder=FRONTEND_DIR)
 
 
-@app.route('/status_all')
-def status_endpoint():
-    return send_from_directory(f'{app.static_folder}/status', 'index.html')
+def _assert(condition, status_code, message):
+    if condition: return
+    res = {
+        "message": message,
+        "status_code": status_code
+    }
+    response = make_response(jsonify(res), status_code)
+    abort(response)
 
 
 @app.route('/status')
@@ -38,7 +45,33 @@ def files(filename):
     return send_from_directory(app.static_folder, filename, mimetype=mimetype, cache_timeout=60)
 
 
-@app.route('/
+@app.route('/activities', methods=['GET'])
+def get_activities():
+    date = request.args.get('date') if 'date' in request.args else None
+    activities = controller.get_activities(date)
+    res = {
+        'activities_count': len(activities),
+        'activities': activities,
+        'status_code': 201
+    }
+    return jsonify(res), 200
+
+
+@app.route('/activities', methods=['POST'])
+def post_activity():
+    data = request.get_json()
+    _assert('name' in data, 400, 'Activity without name filed')
+    name = data.get('name')
+    description = data.get('description', '')
+    try:
+        activity = controller.add_activity(name, description)
+    except AssertionError as e:
+        _assert(False, 400, str(e))
+    res = {
+        'activity': activity.repr(),
+        'status_code': 201
+    }
+    return jsonify(res), 201
 
 
 @app.after_request
