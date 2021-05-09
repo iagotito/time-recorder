@@ -24,6 +24,7 @@ def add_activity(name, date, begginning, description=None, end=None):
     activity.save()
     return activity
 
+
 def update_activity(id, data):
     activity = Activity.find_by_id(id)
     assert activity, f'Activity {id} does not exists'

@@ -61,6 +61,7 @@ def get_activity(id):
 @app.route('/activities', methods=['GET'])
 def get_activities():
     date = request.args.get('date', None)
+    _assert(date is not None, 400, 'Date parameter not found')
     activities = controller.get_activities(date)
     res = {
         'activities_count': len(activities),
