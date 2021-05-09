@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, send_from_directory, jsonify, request
+from flask import Flask, send_from_directory, jsonify, request, make_response, abort
 
 from . import controller
 
@@ -45,14 +45,27 @@ def files(filename):
     return send_from_directory(app.static_folder, filename, mimetype=mimetype, cache_timeout=60)
 
 
+@app.route('/activity/<id>', methods=['GET'])
+def get_activity(id):
+    try:
+        activity = controller.get_activity(id)
+    except AssertionError as e:
+        _assert(False, 400, str(e))
+    res = {
+        'activity': activity,
+        'status_code': 200
+    }
+    return jsonify(res), 200
+
+
 @app.route('/activities', methods=['GET'])
 def get_activities():
-    date = request.args.get('date') if 'date' in request.args else None
+    date = request.args.get('date', None)
     activities = controller.get_activities(date)
     res = {
         'activities_count': len(activities),
         'activities': activities,
-        'status_code': 201
+        'status_code': 200
     }
     return jsonify(res), 200
 
@@ -61,14 +74,19 @@ def get_activities():
 def post_activity():
     data = request.get_json()
     _assert('name' in data, 400, 'Activity without name filed')
+    _assert('date' in data, 400, 'Activity without date filed')
+    _assert('begginning' in data, 400, 'Activity without begginning field')
     name = data.get('name')
-    description = data.get('description', '')
+    date = data.get('date')
+    begginning = data.get('begginning')
+    description = data.get('description', None)
+    end = data.get('end', None)
     try:
-        activity = controller.add_activity(name, description)
+        activity = controller.add_activity(name=name, date=date, begginning=begginning, description=description, end=end)
     except AssertionError as e:
         _assert(False, 400, str(e))
     res = {
-        'activity': activity.repr(),
+        'activity': activity.to_dict(),
         'status_code': 201
     }
     return jsonify(res), 201
