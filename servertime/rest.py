@@ -11,14 +11,18 @@ if not os.path.exists(FRONTEND_DIR):
 app = Flask(__name__, static_url_path='/', static_folder=FRONTEND_DIR)
 
 
-def _assert(condition, status_code, message):
-    if condition: return
+def _abort(status_code, message):
     res = {
         "message": message,
         "status_code": status_code
     }
     response = make_response(jsonify(res), status_code)
     abort(response)
+
+
+def _assert(condition, status_code, message):
+    if condition: return
+    _abort(status_code, message)
 
 
 @app.route('/status')
@@ -50,7 +54,7 @@ def get_activity(id):
     try:
         activity = controller.get_activity(id)
     except AssertionError as e:
-        _assert(False, 400, str(e))
+        _abort(400, str(e))
     res = {
         'activity': activity,
         'status_code': 200
@@ -85,7 +89,7 @@ def post_activity():
     try:
         activity = controller.add_activity(name=name, date=date, begginning=begginning, description=description, end=end)
     except AssertionError as e:
-        _assert(False, 400, str(e))
+        _abort(400, str(e))
     res = {
         'activity': activity.to_dict(),
         'status_code': 201
@@ -102,7 +106,7 @@ def update_activity(id):
     try:
         activity = controller.update_activity(id=id, data=data)
     except AssertionError as e:
-        _assert(False, 400, str(e))
+        _abort(400, str(e))
     res = {
         'activity': activity.to_dict(),
         'status_code': 200
