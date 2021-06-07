@@ -29,17 +29,17 @@
   </div>
 
   <br><br>
-  <input id="log-txt" type="text" placeholder="type the log"/>
-  <br><br>
-  <button id="log-btn">Log activity</button>
-  <br><br>
-  <button id="get-data-btn">Retrieve data from your sheet</button>
-  <button id="get-times-btn">Calculate time of activities</button>
-  <pre id="data-pre" style="white-space: pre-wrap;"></pre>
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="credentials.js"></script>
-  <script src="scripts/gapi.js"></script>
-  <script src="scripts/sheets.js"></script>
+  <div id="log-div">
+    <input
+      id="log-txt"
+      type="text"
+      placeholder="type the log"
+    />
+    <br><br>
+    <button onclick="logActivity()" id="log-btn">
+      Log activity
+    </button>
+  </div>
   <script src="scripts/util/util.js"></script>
   <script src="scripts/main.js"></script>
 </body>

@@ -27,15 +27,9 @@ function getHours () {
 
 function getDate () {
     let today = new Date();
-    return today.getFullYear() + "-" + 
-        pad((today.getMonth() + 1)) + "-" +
-        pad(today.getDate());
-}
-
-function getDateId () {
-    let today = getDate();
-    let todayId = today.slice(0, 4) + today.slice(5, 7) + today.slice(8, 10);
-    return parseInt(todayId);
+    return pad(today.getDate()) + "/" +
+        pad((today.getMonth() + 1)) + "/" +
+        today.getFullYear();
 }
 
 function pad (num) {
@@ -45,7 +39,7 @@ function pad (num) {
 function calculateTimeDiff (beginnig, end) {
     beginnig = new Date(beginnig);
     end = new Date(end);
-    
+
     let diff = end.getTime() - beginnig.getTime();
     let hoursDiff = diff / (1000 * 60 * 60);
 
