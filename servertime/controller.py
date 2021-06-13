@@ -30,7 +30,7 @@ def add_activity(name, date=None, begginning=None, description=None, end=None):
         previous.total = time_diff(previous.begginning, previous.end)
         previous.save()
 
-    return activity.to_dict(), previous.to_dict()
+    return activity.to_dict(), previous.to_dict() if previous else None
 
 
 def update_activity(id, data):
