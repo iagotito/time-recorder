@@ -43,3 +43,76 @@
 .google-btn:active {
   background: #1669F2;
 }
+
+.activity-div {
+    display: flex;
+    position: relative;
+    height: 20px;
+    padding-bottom: 7px;
+    z-index: 0;
+}
+
+.name-div {
+    width: 20%;
+    height: 25px;
+    padding-right: 2px;
+    overflow-y: hidden;
+}
+
+.desc-div {
+    width: 20%;
+    height: 25px;
+    padding-right: 2px;
+    overflow-y: hidden;
+}
+
+.beg-div {
+    width: 8%;
+    height: 25px;
+    padding-right: 2px;
+    overflow-y: hidden;
+}
+
+.end-div {
+    width: 8%;
+    height: 25px;
+    padding-right: 2px;
+    overflow-y: hidden;
+}
+
+.date-div {
+    width: 10%;
+    height: 25px;
+    overflow-y: hidden;
+}
+
+.textarea {
+  border: 1px solid #ccc;
+  padding: 1px 6px;
+  display: block;
+  width: 100%;
+  resize: none;
+  min-height: 25px;
+  line-height: 25px;
+  box-sizing: border-box;
+}
+
+.name-span {
+    background-color: #cbc3e3;
+}
+
+.desc-span {
+    background-color: #add8e3;
+}
+
+.beg-span {
+    background-color: #90ee90;
+}
+
+.end-span {
+    background-color: #fed8b1;
+}
+
+.date-span {
+    background-color: #ffcccb;
+}

@@ -1,7 +1,7 @@
 let API_URL = "http://localhost:8000";
 let activities;
 let $logTxt = document.querySelector("#log-txt");
-let $activities = document.getElementById("data-div");
+let $activities = document.getElementById("activities-div");
 
 $logTxt.addEventListener("keypress", (event) => {
     if (event.keyCode == 13) logActivity();
@@ -51,7 +51,13 @@ function logActivity() {
 
 function displayActivities() {
     $activities.innerHTML = `
-        <p>ID Name Description Begginning End Date</p>
+        <div class="activity-div">
+        <div class="name-span name-div">Name</div>
+        <div class="desc-span desc-div">Description</div>
+        <div class="beg-span beg-div">Begin</div>
+        <div class="end-span end-div">End</div>
+        <div class="date-span date-div">Date</div>
+        </div>
     `;
     activities.forEach((activity) => { appendActivity(activity); });
 }
@@ -64,23 +70,47 @@ function appendActivity(activity) {
 function makeActivityArticle(activity) {
     let article = document.createElement("article");
     article.id = `activity${activity.id}`;
-    /*
     article.innerHTML = `
-        <input id="id${activity.id}" type="text" value="${activity.id}">
-        <input id="name${activity.id}" type="text" value="${activity.name}">
-        <input id="description${activity.id}" type="text" value="${activity.description ? activity.description : ""}">
-        <input id="begginning${activity.id}" type="text" value="${activity.begginning}">
-        <input id="end${activity.id}" type="text" value="${activity.end ? activity.end : ""}">
-        <input id="date${activity.id}" type="text" value="${activity.date}">
-    `;
-    */
-    article.innerHTML = `
-        ${activity.id} |
-        ${activity.name} |
-        ${activity.description ? activity.description : "no description"} |
-        ${activity.begginning} |
-        ${activity.end ? activity.end : "in progress"} |
-        ${activity.date}
+        <div id="activity-${activity.id}" class="activity-div" >
+          <div id="name-${activity.id}" class="name-div">
+            <span id="text-${activity.id}" class="textarea name-span" role="textbox" contenteditable
+            onmouseover="showFullText('name', '${activity.id}')"
+            onmouseout="hideText('name', '${activity.id}')"
+            >
+                ${activity.name}
+            </span>
+          </div>
+          <div id="desc-${activity.id}" class="desc-div">
+            <span class="textarea desc-span" role="textbox" contenteditable></span>
+          </div>
+          <div id="begginning-${activity.id}" class="beg-div">
+            <span class="textarea beg-span" role="textbox" contenteditable>
+                ${activity.begginning}
+            </span>
+          </div>
+          <div id="end-${activity.id}" class="end-div">
+            <span class="textarea end-span" role="textbox" contenteditable></span>
+          </div>
+          <div id="date-${activity.id}" class="date-div">
+            <span class="textarea date-span" role="textbox" contenteditable>
+                ${activity.date}
+            </span>
+          </div>
+        </div>
     `;
     return article;
+}
+
+function showFullText(field, id) {
+    let $field = document.getElementById(`${field}-${id}`);
+    let $div = document.getElementById(`activity-${id}`);
+    $field.style.overflowY = "visible";
+    $div.style.zIndex = 1;
+}
+
+function hideText(field, id) {
+    let $field = document.getElementById(`${field}-${id}`);
+    let $div = document.getElementById(`activity-${id}`);
+    $field.style.overflowY = "hidden";
+    $div.style.zIndex = 0;
 }

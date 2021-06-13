@@ -5,22 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TIME RECORDER</title>
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+  <script type="text/javascript" src="https://livejs.com/live.js"></script>
 </head>
 <body>
   <link rel="stylesheet" type="text/css" href="stylesheet.css" />
 
-  <div class="google-btn" id="authorize-button" style="display: none">
-    <div class="google-icon-wrapper">
-      <img class="google-icon" src="/images/Google_G_Logo.svg"/>
-    </div>
-    <p class="btn-text"><b>Sign in with Google</b></p>
-  </div>
-  <div class="google-btn" id="signout-button" style="display: none;">
-    <div class="google-icon-wrapper">
-      <img class="google-icon" src="/images/Google_G_Logo.svg"/>
-    </div>
-    <p class="btn-text"><b>Disconnect</b></p>
-  </div>
   <div class="google-btn" id="loading-div" style="display: none">
     <div class="google-icon-wrapper">
       <img class="google-icon" src="images/Google_G_Logo.svg"/>
@@ -34,6 +23,7 @@
       id="log-txt"
       type="text"
       placeholder="type the log"
+      autocomplete="off"
     />
     <br><br>
     <button onclick="logActivity()" id="log-btn">
@@ -41,7 +31,7 @@
     </button>
   </div>
 
-  <div id="data-div"></div>
+  <div id="activities-div" style="padding-top: 30px"></div>
 
   <script src="scripts/util/util.js"></script>
   <script src="scripts/main.js"></script>
