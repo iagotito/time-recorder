@@ -45,6 +45,7 @@ function logActivity() {
         let activity = data.activity;
         activities.push(activity);
         appendActivity(activity);
+        updateActivity(data.previous);
     })
     .catch(err => { console.log(err); })
 }
@@ -54,9 +55,10 @@ function displayActivities() {
         <div class="activity-div">
         <div class="name-span name-div">Name</div>
         <div class="desc-span desc-div">Description</div>
+        <div class="date-span date-div">Date</div>
         <div class="beg-span beg-div">Begin</div>
         <div class="end-span end-div">End</div>
-        <div class="date-span date-div">Date</div>
+        <div class="total-span total-div">Total</div>
         </div>
     `;
     activities.forEach((activity) => { appendActivity(activity); });
@@ -80,25 +82,41 @@ function makeActivityArticle(activity) {
                 ${activity.name}
             </span>
           </div>
-          <div id="desc-${activity.id}" class="desc-div">
-            <span class="textarea desc-span" role="textbox" contenteditable></span>
+          <div id="desc-${activity.id}-div" class="desc-div">
+            <span id="desc-${activity.id}" class="textarea desc-span" role="textbox" contenteditable>
+                ${activity.description !== null ? activity.description : ""}
+            </span>
           </div>
-          <div id="begginning-${activity.id}" class="beg-div">
-            <span class="textarea beg-span" role="textbox" contenteditable>
+          <div id="date-${activity.id}-div" class="date-div">
+            <span id="date-${activity.id}" class="textarea date-span" role="textbox" contenteditable>
+                ${activity.date}
+            </span>
+          </div>
+          <div id="begginning-${activity.id}-div" class="beg-div">
+            <span id="begginning-${activity.id}" class="textarea beg-span" role="textbox" contenteditable>
                 ${activity.begginning}
             </span>
           </div>
-          <div id="end-${activity.id}" class="end-div">
-            <span class="textarea end-span" role="textbox" contenteditable></span>
+          <div id="end-${activity.id}-div" class="end-div">
+            <span id="end-${activity.id}" class="textarea end-span" role="textbox" contenteditable>
+                ${activity.end !== null ? activity.end : ""}
+            </span>
           </div>
-          <div id="date-${activity.id}" class="date-div">
-            <span class="textarea date-span" role="textbox" contenteditable>
-                ${activity.date}
+          <div id="total-${activity.id}-div" class="total-div">
+            <span id="total-${activity.id}" class="textarea total-span" role="textbox" contenteditable>
+                ${activity.total !== null ? activity.total : ""}
             </span>
           </div>
         </div>
     `;
     return article;
+}
+
+function updateActivity(activity) {
+    let $end = document.getElementById(`end-${activity.id}`);
+    let $total = document.getElementById(`total-${activity.id}`);
+    $end.innerHTML = activity.end;
+    $total.innerHTML = activity.total;
 }
 
 function showFullText(field, id) {

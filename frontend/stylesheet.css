@@ -66,22 +66,28 @@
     overflow-y: hidden;
 }
 
+.date-div {
+    width: 10%;
+    height: 25px;
+    overflow-y: hidden;
+}
+
 .beg-div {
-    width: 8%;
+    width: 73px;
     height: 25px;
     padding-right: 2px;
     overflow-y: hidden;
 }
 
 .end-div {
-    width: 8%;
+    width: 73px;
     height: 25px;
     padding-right: 2px;
     overflow-y: hidden;
 }
 
-.date-div {
-    width: 10%;
+.total-div {
+    width: 8%;
     height: 25px;
     overflow-y: hidden;
 }
@@ -105,14 +111,18 @@
     background-color: #add8e3;
 }
 
-.beg-span {
+.date-span {
     background-color: #90ee90;
+}
+
+.beg-span {
+    background-color: #ffffbc;
 }
 
 .end-span {
     background-color: #fed8b1;
 }
 
-.date-span {
+.total-span {
     background-color: #ffcccb;
 }
