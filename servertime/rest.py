@@ -79,36 +79,47 @@ def get_activities():
 def post_activity():
     data = request.get_json()
     _assert('name' in data, 400, 'Activity without name filed')
-    _assert('date' in data, 400, 'Activity without date filed')
-    _assert('begginning' in data, 400, 'Activity without begginning field')
     name = data.get('name')
-    date = data.get('date')
-    begginning = data.get('begginning')
+    date = data.get('date', None)
+    begginning = data.get('begginning', None)
     description = data.get('description', None)
     end = data.get('end', None)
     try:
-        activity = controller.add_activity(name=name, date=date, begginning=begginning, description=description, end=end)
+        activity, previous = controller.add_activity(name=name, date=date, begginning=begginning, description=description, end=end)
     except AssertionError as e:
         _abort(400, str(e))
     res = {
-        'activity': activity.to_dict(),
+        'activity': activity,
         'status_code': 201
     }
+    if previous:
+        res['previous'] = previous
+
     return jsonify(res), 201
 
 
-@app.route('/activity/<id>', methods=['PUT'])
+@app.route('/activity/<id>', methods=['PATCH'])
 def update_activity(id):
     data = request.get_json()
-    _assert('name' in data, 400, 'New activity data without name filed')
-    _assert('date' in data, 400, 'New activity data without date filed')
-    _assert('begginning' in data, 400, 'New activity data without begginning field')
     try:
         activity = controller.update_activity(id=id, data=data)
     except AssertionError as e:
         _abort(400, str(e))
     res = {
-        'activity': activity.to_dict(),
+        'activity': activity,
+        'status_code': 200
+    }
+    return jsonify(res), 200
+
+
+@app.route('/activity/<id>/end', methods=['PATCH'])
+def mark_as_ended(id):
+    try:
+        activity = controller.mark_as_ended(id)
+    except AssertionError as e:
+        _abort(400, str(e))
+    res = {
+        'activity': activity,
         'status_code': 200
     }
     return jsonify(res), 200
