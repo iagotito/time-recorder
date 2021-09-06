@@ -1,24 +1,46 @@
-
 # Time manager
 
-This is a project to help to keep tack of how much time you spent in one or many activities at the end of the day.  
-It uses the Google Sheets API to save da data of the day in a Google Spreadsheet and to retrieve the data from it to calculate the activities realized in the day and how much time was spent in each one of them.
+This is a project to help to keep tack of how much time you spent in
+one or many activities at the end of the day. It uses the Google Sheets
+API to save the data of the day in a Google Spreadsheet and to retrieve
+the data from it to calculate the activities realized in the day and
+how much time was spent in each one of them.
 
-## How it works
+## How to configure
 
-It still don't have a friendly approach, so you have to set some informations manually. See the `credentials.json` for more info. It is local server that you can start and allows to start to log your activities.  
-Every day the API creates a new sheet page to that day, and you can only log things in the current's day sheet. In the future you will be able to choose another days.
+It still don't have a friendly approach, so you have to set some
+informations manually.
+
+1. Create a new Google Spreadsheet that you will use to save the data;
+2. Open the file `credentials.js` and place the spreadsheet ID in the
+   const "SPREADSHEET\_ID";
+
+See the `credentials.js` for more info
 
 ## How to use
 
-- To log some activity in your spreadsheet just type the activity name in the text area and click the button or press enter and this will log the start time of this activity.
-- If you log another activity, the previous activity will have it's end time setted to the same as the beggiging of the new one.
-- To end the activity without start a new one just type "end".
+1. Enter into the directory and run the web server. For example, using
+   Python's http.sever module:
+   ```bash
+   python3 -m http.server 8000
+   ```
+   It will run the server on `localhost:8000`;
+2. Login into a Google account with access to the spreadsheet defined
+   in the `credentials.js`;
+- There is a bug that after logging in you need to refresh the page in
+  order to the app works.
+3. Type something into the log field and sendo to the spreadsheet. Type
+   "end" to finish an activity. If you changed something directly into
+   the spreadsheet, click the button "Calculate time of activities" to
+   refresh the times.
 
+## How it works
 
-## How it should look at the end
+It is local server that you can start and allows to start to log your
+activities. Every day the API creates a new sheet page to that day, and
+you can only log things in the current's day sheet. In the future you
+will be able to choose another days.
 
-Some of my ideas of how it should work are based on [this repository](https://github.com/anvaka/time), but I want to make it myself to learn how to do it and because this project don't have somethings that I want.
-
-It shall have extra camps in the main page such as a date selector to which day do you want to retrieve data or even add info.  
-Functions to help the type os activities like as you type the activity name it will show a list of the open tasks to make it easy re-log an repeated activity.
+When you type a new activity, it sets the end time of the previous
+acitivity and the begin time of the new one. Type "end" to finish an
+activity without start another.
